@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Planner da Tainá | Gestão & Entrevista de Clientes</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
 <style>
@@ -28,7 +28,8 @@
         background: linear-gradient(135deg, #fff5f7 0%, #f7eeef 100%);
         color: var(--dark-text);
         min-height: 100vh;
-        padding: 10px;
+        padding: 12px;
+        overflow-x: hidden;
     }
 
     .container {
@@ -37,51 +38,74 @@
         width: 100%;
     }
 
-    /* TOP BAR & GREETING */
+    /* TOP HEADER */
     .top-header {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
+        flex-direction: column;
         background: white;
-        padding: 15px 20px;
+        padding: 15px;
         border-radius: 20px;
         box-shadow: 0 10px 30px rgba(255, 71, 126, 0.08);
-        margin-bottom: 20px;
+        margin-bottom: 15px;
         border: 2px solid var(--border-color);
-        flex-wrap: wrap;
         gap: 15px;
+    }
+
+    @media(min-width: 768px) {
+        .top-header {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
     }
 
     .greeting h1 {
         font-family: 'Playfair Display', serif;
         color: var(--pink-primary);
-        font-size: 24px;
+        font-size: 22px;
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 8px;
     }
 
     .greeting p {
         color: #6c757d;
-        font-size: 13px;
+        font-size: 12px;
         margin-top: 4px;
     }
 
     /* MINI HEALTH WIDGET */
     .health-widget {
         display: flex;
-        gap: 12px;
+        flex-direction: column;
+        gap: 10px;
         background: #fff5f8;
-        padding: 10px 15px;
+        padding: 12px;
         border-radius: 16px;
         border: 1.5px dashed var(--pink-soft);
-        align-items: center;
-        flex-wrap: wrap;
         width: 100%;
     }
 
     @media(min-width: 768px) {
         .health-widget {
+            flex-direction: row;
+            align-items: center;
+            width: auto;
+            gap: 15px;
+        }
+    }
+
+    .health-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+    }
+
+    @media(min-width: 768px) {
+        .health-row {
             width: auto;
         }
     }
@@ -99,27 +123,34 @@
         background: var(--pink-primary);
         color: white;
         border: none;
-        padding: 4px 8px;
+        padding: 6px 10px;
         border-radius: 10px;
         cursor: pointer;
         font-size: 11px;
+        font-weight: 700;
         transition: 0.2s;
     }
 
-    .health-btn:hover {
-        transform: scale(1.05);
+    .health-btn:active {
+        transform: scale(0.95);
     }
 
     /* TABS NAV */
     .nav-tabs {
         display: flex;
         gap: 10px;
-        margin-bottom: 20px;
-        flex-wrap: wrap;
+        margin-bottom: 15px;
+        flex-direction: column;
+    }
+
+    @media(min-width: 600px) {
+        .nav-tabs {
+            flex-direction: row;
+        }
     }
 
     .tab-btn {
-        padding: 12px 20px;
+        padding: 12px;
         background: white;
         border: 2px solid var(--border-color);
         border-radius: 16px;
@@ -133,7 +164,6 @@
         gap: 8px;
         flex: 1;
         justify-content: center;
-        min-width: 140px;
     }
 
     .tab-btn.active {
@@ -153,23 +183,26 @@
 
     /* TAB 1: PLANNER LAYOUT */
     .planner-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
     }
 
     @media(min-width: 992px) {
         .planner-grid {
+            display: grid;
             grid-template-columns: 1fr 400px;
+            gap: 20px;
         }
     }
 
     .calendar-card {
         background: white;
         border-radius: 20px;
-        padding: 15px;
+        padding: 12px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.03);
         border: 2px solid var(--border-color);
+        width: 100%;
     }
 
     @media(min-width: 768px) {
@@ -182,11 +215,11 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
     }
 
     .calendar-header h2 {
-        font-size: 18px;
+        font-size: 17px;
         color: var(--dark-text);
     }
 
@@ -198,12 +231,13 @@
     .cal-nav button {
         background: var(--pink-bg);
         border: none;
-        width: 32px;
-        height: 32px;
+        width: 34px;
+        height: 34px;
         border-radius: 50%;
         color: var(--pink-primary);
         font-weight: bold;
         cursor: pointer;
+        font-size: 16px;
     }
 
     .weekdays {
@@ -212,50 +246,49 @@
         text-align: center;
         font-weight: 700;
         color: var(--pink-primary);
-        margin-bottom: 10px;
-        font-size: 11px;
+        margin-bottom: 8px;
+        font-size: 10px;
+    }
+
+    @media(min-width: 768px) {
+        .weekdays {
+            font-size: 13px;
+        }
     }
 
     .days-grid {
         display: grid;
         grid-template-columns: repeat(7, 1fr);
-        gap: 5px;
+        gap: 4px;
     }
 
     @media(min-width: 768px) {
         .days-grid {
             gap: 8px;
         }
-        .weekdays {
-            font-size: 13px;
-        }
     }
 
     .day-cell {
         aspect-ratio: 1;
         background: #fdf8fa;
-        border-radius: 10px;
-        padding: 4px;
+        border-radius: 8px;
+        padding: 2px;
         cursor: pointer;
         border: 1.5px solid #f9ebf2;
-        transition: 0.2s;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        align-items: center;
         font-weight: 600;
-        font-size: 12px;
+        font-size: 11px;
     }
 
     @media(min-width: 768px) {
         .day-cell {
             padding: 8px;
             font-size: 13px;
+            border-radius: 10px;
         }
-    }
-
-    .day-cell:hover {
-        border-color: var(--pink-soft);
-        background: #fff0f5;
     }
 
     .day-cell.selected {
@@ -268,35 +301,46 @@
         display: flex;
         gap: 2px;
         justify-content: center;
+        height: 5px;
     }
 
     .dot {
-        width: 5px;
-        height: 5px;
+        width: 4px;
+        height: 4px;
         border-radius: 50%;
         background: var(--pink-soft);
+    }
+    .day-cell.selected .dot {
+        background: white;
     }
 
     /* SIDE ANOTAÇÕES / TAREFAS */
     .tasks-card {
         background: white;
         border-radius: 20px;
-        padding: 20px;
+        padding: 15px;
         border: 2px solid var(--border-color);
         box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        width: 100%;
+    }
+
+    @media(min-width: 768px) {
+        .tasks-card {
+            padding: 20px;
+        }
     }
 
     .tasks-card h3 {
         color: var(--pink-primary);
-        margin-bottom: 15px;
-        font-size: 17px;
+        margin-bottom: 12px;
+        font-size: 16px;
     }
 
     .task-input-group {
         display: flex;
         flex-direction: column;
         gap: 10px;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
     }
 
     .task-input-group input, .task-input-group select {
@@ -305,6 +349,7 @@
         border-radius: 12px;
         outline: none;
         font-size: 14px;
+        width: 100%;
     }
 
     .btn-add-task {
@@ -316,13 +361,14 @@
         font-weight: 700;
         cursor: pointer;
         font-size: 14px;
+        width: 100%;
     }
 
     .task-list-items {
         display: flex;
         flex-direction: column;
-        gap: 10px;
-        max-height: 350px;
+        gap: 8px;
+        max-height: 280px;
         overflow-y: auto;
     }
 
@@ -330,11 +376,11 @@
         background: #fff8fa;
         border: 1px solid var(--border-color);
         border-radius: 12px;
-        padding: 12px;
+        padding: 10px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        gap: 10px;
+        gap: 8px;
     }
 
     .priority-alta { border-left: 4px solid #ff4d4d; }
@@ -351,45 +397,43 @@
 
     .bell-btn.active {
         opacity: 1;
-        animation: ring 0.5s ease;
     }
 
     /* QUADRO ESCANDALOSO MENININHA */
     .super-reminder-box {
-        margin-top: 20px;
+        margin-top: 15px;
         background: linear-gradient(135deg, #ff007f 0%, #7209b7 100%);
         color: white;
-        border-radius: 20px;
-        padding: 20px;
-        box-shadow: 0 15px 35px rgba(255, 0, 127, 0.3);
-        border: 3px solid #ffffff;
+        border-radius: 16px;
+        padding: 15px;
+        box-shadow: 0 10px 25px rgba(255, 0, 127, 0.25);
+        border: 2px solid #ffffff;
     }
 
     .super-reminder-box h3 {
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 800;
-        margin-bottom: 8px;
+        margin-bottom: 6px;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 6px;
     }
 
     @media(min-width: 768px) {
         .super-reminder-box h3 {
-            font-size: 18px;
+            font-size: 16px;
         }
     }
 
     .reminder-content-display {
         background: rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(10px);
-        padding: 12px;
-        border-radius: 12px;
-        font-size: 14px;
+        padding: 10px;
+        border-radius: 10px;
+        font-size: 13px;
         font-weight: 600;
-        border: 1px solid rgba(255, 255, 255, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        word-break: break-word;
     }
 
     /* TAB 2: ENTREVISTA DO CLIENTE */
@@ -398,6 +442,7 @@
         border-radius: 20px;
         padding: 15px;
         border: 2px solid var(--border-color);
+        width: 100%;
     }
 
     @media(min-width: 768px) {
@@ -408,35 +453,52 @@
 
     .search-bar-section {
         background: #fff0f5;
-        padding: 15px;
+        padding: 12px;
         border-radius: 16px;
         display: flex;
+        flex-direction: column;
         gap: 10px;
-        align-items: center;
-        margin-bottom: 25px;
-        flex-wrap: wrap;
+        margin-bottom: 20px;
+    }
+
+    @media(min-width: 768px) {
+        .search-bar-section {
+            flex-direction: row;
+            align-items: center;
+        }
     }
 
     .search-bar-section input {
         flex: 1;
-        min-width: 200px;
         padding: 12px;
         border: 2px solid var(--border-color);
         border-radius: 12px;
         font-size: 14px;
+        width: 100%;
+    }
+
+    .actions-group {
+        display: flex;
+        gap: 8px;
+        width: 100%;
+    }
+
+    @media(min-width: 768px) {
+        .actions-group {
+            width: auto;
+        }
     }
 
     .btn-action {
         background: var(--purple-accent);
         color: white;
         border: none;
-        padding: 12px 18px;
+        padding: 12px 14px;
         border-radius: 12px;
         font-weight: 700;
         cursor: pointer;
         font-size: 13px;
         flex: 1;
-        min-width: 120px;
         text-align: center;
     }
 
@@ -446,22 +508,23 @@
 
     .form-section-title {
         color: var(--pink-primary);
-        font-size: 15px;
+        font-size: 14px;
         font-weight: 800;
-        margin: 20px 0 12px 0;
+        margin: 18px 0 10px 0;
         padding-bottom: 6px;
         border-bottom: 2px solid var(--pink-light);
         text-transform: uppercase;
     }
 
     .form-grid {
-        display: grid;
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
         gap: 12px;
     }
 
     @media(min-width: 768px) {
         .form-grid {
+            display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
         }
@@ -471,6 +534,7 @@
         display: flex;
         flex-direction: column;
         gap: 6px;
+        width: 100%;
     }
 
     .form-group.full {
@@ -479,12 +543,12 @@
 
     .form-group label {
         font-weight: 700;
-        font-size: 13px;
+        font-size: 12px;
         color: #4a5568;
     }
 
     .form-group input, .form-group select, .form-group textarea {
-        padding: 12px;
+        padding: 11px;
         border: 1.5px solid var(--border-color);
         border-radius: 10px;
         outline: none;
@@ -495,8 +559,8 @@
     .checkbox-options {
         display: flex;
         flex-wrap: wrap;
-        gap: 8px;
-        margin-top: 5px;
+        gap: 6px;
+        margin-top: 4px;
     }
 
     .checkbox-options label {
@@ -505,11 +569,12 @@
         gap: 6px;
         font-weight: 500;
         background: #fdf5f8;
-        padding: 8px 12px;
+        padding: 6px 10px;
         border-radius: 8px;
         border: 1px solid var(--border-color);
         cursor: pointer;
-        font-size: 13px;
+        font-size: 12px;
+        flex: 1 1 40%;
     }
 </style>
 </head>
@@ -525,13 +590,17 @@
 
         <!-- SAÚDE LEMBRETE PEQUENO -->
         <div class="health-widget">
-            <div class="health-item">
-                💊 Remédio: <span id="st-remedio">Pendente</span>
+            <div class="health-row">
+                <div class="health-item">
+                    💊 Remédio: <span id="st-remedio">Pendente</span>
+                </div>
                 <button class="health-btn" onclick="toggleStatus('st-remedio')">Tomar</button>
             </div>
-            <div style="width: 1px; height: 15px; background: var(--pink-soft);"></div>
-            <div class="health-item">
-                💧 Água: <span id="st-agua">1.0 L</span>
+            <div style="width: 100%; height: 1px; background: var(--pink-soft);" class="line-sep"></div>
+            <div class="health-row">
+                <div class="health-item">
+                    💧 Água: <span id="st-agua">1.0 L</span>
+                </div>
                 <button class="health-btn" onclick="addAgua()">+250ml</button>
             </div>
         </div>
@@ -591,10 +660,12 @@
     <div id="tab-entrevista" class="tab-content">
         <div class="interview-card">
             <div class="search-bar-section">
-                <input type="text" id="search-client" placeholder="Digite o nome do cliente para buscar a ficha salva...">
-                <button class="btn-action" onclick="searchClient()">🔍 Buscar</button>
-                <button class="btn-action btn-pdf" onclick="generatePDF()">📄 PDF</button>
-                <button class="btn-action" style="background:#10b981;" onclick="saveClient()">💾 Salvar</button>
+                <input type="text" id="search-client" placeholder="Digite o nome do cliente...">
+                <div class="actions-group">
+                    <button class="btn-action" onclick="searchClient()">🔍 Buscar</button>
+                    <button class="btn-action btn-pdf" onclick="generatePDF()">📄 PDF</button>
+                    <button class="btn-action" style="background:#10b981;" onclick="saveClient()">💾 Salvar</button>
+                </div>
             </div>
 
             <form id="interview-form">
@@ -614,11 +685,11 @@
                         <div class="checkbox-options">
                             <label><input type="checkbox" name="vinculo" value="CLT"> CLT</label>
                             <label><input type="checkbox" name="vinculo" value="Empresário"> Empresário</label>
-                            <label><input type="checkbox" name="vinculo" value="Sócio"> Sócio de empresa</label>
+                            <label><input type="checkbox" name="vinculo" value="Sócio"> Sócio</label>
                             <label><input type="checkbox" name="vinculo" value="Autônomo"> Autônomo</label>
-                            <label><input type="checkbox" name="vinculo" value="Profissional Liberal"> Profissional liberal</label>
+                            <label><input type="checkbox" name="vinculo" value="Liberal"> Liberal</label>
                             <label><input type="checkbox" name="vinculo" value="Aposentado"> Aposentado</label>
-                            <label><input type="checkbox" name="vinculo" value="Servidor Público"> Servidor público</label>
+                            <label><input type="checkbox" name="vinculo" value="Servidor Público"> Servidor</label>
                         </div>
                     </div>
                     <div class="form-group">
@@ -630,7 +701,7 @@
                         <input type="text" id="cli-cargo">
                     </div>
                     <div class="form-group">
-                        <label>Especialização / Área específica:</label>
+                        <label>Especialización / Área específica:</label>
                         <input type="text" id="cli-especializacao">
                     </div>
                     <div class="form-group">
@@ -683,12 +754,12 @@
                         <div class="checkbox-options">
                             <label><input type="checkbox" name="comprovante" value="Holerite"> Holerite</label>
                             <label><input type="checkbox" name="comprovante" value="Pró-labore"> Pró-labore</label>
-                            <label><input type="checkbox" name="comprovante" value="Extratos"> Extratos bancários</label>
-                            <label><input type="checkbox" name="comprovante" value="IRPF"> Imposto de Renda</label>
+                            <label><input type="checkbox" name="comprovante" value="Extratos"> Extratos</label>
+                            <label><input type="checkbox" name="comprovante" value="IRPF"> IRPF</label>
                             <label><input type="checkbox" name="comprovante" value="DECORE"> DECORE</label>
-                            <label><input type="checkbox" name="comprovante" value="Notas Fiscais"> Notas Fiscais</label>
+                            <label><input type="checkbox" name="comprovante" value="Notas"> Notas Fiscais</label>
                             <label><input type="checkbox" name="comprovante" value="Contratos"> Contratos</label>
-                            <label><input type="checkbox" name="comprovante" value="Lucros"> Distribuição de Lucros</label>
+                            <label><input type="checkbox" name="comprovante" value="Lucros"> Lucros</label>
                         </div>
                     </div>
                 </div>
@@ -697,7 +768,7 @@
                 <div class="form-section-title">3. Composição de Renda</div>
                 <div class="form-grid">
                     <div class="form-group">
-                        <label>Outras pessoas participarão da composição?</label>
+                        <label>Outras pessoas participarão?</label>
                         <select id="cli-tem-comp"><option>Não</option><option>Sim</option></select>
                     </div>
                     <div class="form-group">
@@ -721,7 +792,7 @@
                         <input type="text" id="comp-rendas">
                     </div>
                     <div class="form-group full">
-                        <label>Pergunta importante: Além das pessoas mencionadas, existe mais alguém que participe financeiramente ou no patrimônio?</label>
+                        <label>Pergunta importante: Existe mais alguém que participe financeiramente ou no patrimônio?</label>
                         <textarea id="comp-extra" rows="3"></textarea>
                     </div>
                 </div>
@@ -816,7 +887,7 @@
             const item = document.createElement('div');
             item.className = `task-item priority-${t.priority}`;
             item.innerHTML = `
-                <div>
+                <div style="word-break: break-word; flex: 1;">
                     <strong>${t.title}</strong>
                     <br><small style="color:#6c757d">Prioridade: ${t.priority.toUpperCase()}</small>
                 </div>
